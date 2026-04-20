@@ -16,7 +16,6 @@ def resource_path(relative_path):
 
     return os.path.join(base_path, relative_path)
 
-
 # ----------------------------
 # 🚀 Criação do Flask
 # ----------------------------
@@ -31,9 +30,9 @@ app.config.from_object(Config)
 # 📁 Pastas do projeto
 # ----------------------------
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
 UPLOAD_DIR = os.path.join(Config.BASE_DIR, "uploads")
 OUTPUT_DIR = os.path.join(Config.BASE_DIR, "outputs")
+
 
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 os.makedirs(OUTPUT_DIR, exist_ok=True)
@@ -44,13 +43,11 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 from app.routes.generator import generator_blueprint
 app.register_blueprint(generator_blueprint)
 
-
 # ----------------------------
 # 🌐 Abrir navegador automático
 # ----------------------------
 def open_browser():
     webbrowser.open("http://127.0.0.1:5000")
-
 
 # ----------------------------
 # ▶️ RUN
