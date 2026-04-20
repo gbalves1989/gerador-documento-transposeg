@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gerador de Documentos</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+
+<body>
+  <div class="app">
+    <aside class="sidebar card">
+      <h1>Gerador de Documentos</h1>
+
+      <div class="section">
+        <label class="label">Dados dos Documentos</label>
+
+        <div class="actions">
+          <button class="btn-secondary" id="reloadJsonBtn" type="button">
+            Recarregar Variáveis
+          </button>
+        </div>
+
+        <div class="hint" style="font-size: 10px; margin-top: 5px;">
+          Clique para recarregar as últimas variaveis geradas para os documentos.
+        </div>
+      </div>
+
+      <div class="section">
+        <label class="label">Nome da variável</label>
+        <input type="text" id="varName" placeholder="Ex.: NOME BENEFICIARIO" />
+
+        <label class="label" style="margin-top:12px;">Valor da variável</label>
+        <input type="text" id="varValue" placeholder="Ex.: João da Silva" />
+
+        <div class="actions">
+          <button class="btn-primary" id="saveVarBtn" type="button">Salvar variável</button>
+          <button class="btn-secondary" id="cancelEditBtn" type="button" style="display:none;">Cancelar edição</button>
+        </div>
+
+        <div class="hint" style="font-size: 10px; margin-top: 5px;">
+          Ao salvar, o nome vira chave no formato <strong>[NOME_BENEFICIARIO]</strong>. Não colocar underline e sim dar espaço no nome da variável.
+        </div>
+      </div>
+
+      <div class="section">
+        <label class="label">Documento modelo (.docx)</label>
+        <input type="file" id="docxFileInput" accept=".docx" />
+
+        <div class="actions">
+          <button class="btn-secondary" id="readDocBtn" type="button">Selecionar / Ler documento</button>
+          <button class="btn-primary" id="downloadDocxBtn" type="button">Baixar DOCX preenchido</button>
+          <button class="btn-secondary" id="downloadPdfBtn" type="button">Baixar PDF</button>
+        </div>
+
+        <div class="warning">
+          A conversão para PDF depende do backend com docx2pdf.
+        </div>
+
+        <div class="status" id="statusMsg"></div>
+      </div>
+    </aside>
+
+    <main class="content card">
+      <div class="topline">
+        <div>
+          <h2 style="margin:0 0 8px;">Variáveis por documento</h2>
+          <div class="hint" style="font-size: 10px; margin-top: 5px;">
+            Cada aba representa um documento. A tabela é carregada com base no JSON salvo.
+          </div>
+        </div>
+      </div>
+
+      <div class="tabs" id="tabsContainer"></div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:32%;">Variável</th>
+              <th>Valor</th>
+              <th style="width:180px;">Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+
+      <div class="doc-preview">
+        <h3>Prévia do conteúdo lido do DOCX</h3>
+        <div class="preview-box" id="docPreview">Nenhum documento carregado.</div>
+      </div>
+    </main>
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
