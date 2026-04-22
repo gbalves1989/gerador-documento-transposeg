@@ -10,7 +10,18 @@
 <body>
   <div class="app">
     <aside class="sidebar card">
-      <h1>Gerador de Documentos</h1>
+      <h1>Gerador de Documentos</span></h1>
+      <div class="detais">
+        <span class="version-tag">(Versão 1.0)
+        <a
+          class="btn-secondary version-link"
+          href="{{ url_for('generator.version_details') }}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Detalhes da versão
+        </a>
+     </div> 
 
       <div class="section">
         <label class="label">Dados dos Documentos</label>
@@ -50,11 +61,6 @@
         <div class="actions">
           <button class="btn-secondary" id="readDocBtn" type="button">Selecionar / Ler documento</button>
           <button class="btn-primary" id="downloadDocxBtn" type="button">Baixar DOCX preenchido</button>
-          <button class="btn-secondary" id="downloadPdfBtn" type="button">Baixar PDF</button>
-        </div>
-
-        <div class="warning">
-          A conversão para PDF depende do backend com docx2pdf.
         </div>
 
         <div class="status" id="statusMsg"></div>

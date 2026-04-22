@@ -23,7 +23,6 @@ const saveVarBtn = document.getElementById("saveVarBtn");
 const cancelEditBtn = document.getElementById("cancelEditBtn");
 const readDocBtn = document.getElementById("readDocBtn");
 const reloadJsonBtn = document.getElementById("reloadJsonBtn");
-const downloadPdfBtn = document.getElementById("downloadPdfBtn");
 const downloadDocxBtn = document.getElementById("downloadDocxBtn");
 
 function setStatus(message, type = "normal") {
@@ -294,37 +293,6 @@ async function downloadProcessedDocx() {
   }
 }
 
-async function downloadPdf() {
-  const ready = await ensureDocxReady();
-  if (!ready) return;
-
-  try {
-    setStatus("Gerando PDF...", "normal");
-
-    const response = await fetch("/api/generate-pdf", {
-      method: "POST"
-    });
-
-    const contentType = response.headers.get("content-type") || "";
-
-    if (!response.ok) {
-      if (contentType.includes("application/json")) {
-        const json = await response.json();
-        const details = json.details ? ` Detalhes: ${json.details}` : "";
-        throw new Error((json.error || "Erro ao gerar PDF.") + details);
-      }
-      throw new Error("Erro ao gerar PDF.");
-    }
-
-    const blob = await response.blob();
-    triggerDownload(blob, "documento_preenchido.pdf");
-    setStatus("PDF gerado com sucesso.", "success");
-  } catch (error) {
-    console.error(error);
-    setStatus(error.message || "Erro ao gerar PDF.", "error");
-  }
-}
-
 function triggerDownload(blob, filename) {
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
@@ -360,7 +328,6 @@ if (cancelEditBtn) {
 
 readDocBtn.addEventListener("click", readDocxPreview);
 reloadJsonBtn.addEventListener("click", reloadJson);
-downloadPdfBtn.addEventListener("click", downloadPdf);
 downloadDocxBtn.addEventListener("click", downloadProcessedDocx);
 
 window.editRow = editRow;

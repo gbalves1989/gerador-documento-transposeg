@@ -1,12 +1,9 @@
 import os
-import tempfile
-import shutil
 from flask import Blueprint, render_template, jsonify, request, current_app, send_file
 from docx import Document as DocxDocument
-from docx2pdf import convert
-
 from app.utils.json import JsonUtils
 from app.utils.document import Document as DocumentUtils
+
 
 generator_blueprint = Blueprint("generator", __name__, url_prefix="/")
 
@@ -125,48 +122,7 @@ def generate_docx():
         download_name="documento_preenchido.docx"
     )
 
-
-@generator_blueprint.route("/api/generate-pdf", methods=["POST"])
-def generate_pdf():
-    source_path = os.path.join(current_app.config["UPLOAD_DIR"], "modelo.docx")
-    if not os.path.exists(source_path):
-        return jsonify({
-            "ok": False,
-            "error": "Nenhum documento modelo foi carregado. Clique em 'Selecionar / Ler documento' antes de baixar o PDF."
-        }), 400
-
-    state = JsonUtils.load_json()
-    replacements = DocumentUtils.flatten_variables(state)
-
-    temp_dir = tempfile.mkdtemp(prefix="docx_pdf_")
-    try:
-        temp_docx = os.path.join(temp_dir, "temp.docx")
-        temp_pdf = os.path.join(temp_dir, "temp.pdf")
-
-        DocumentUtils.replace_in_docx(source_path, temp_docx, replacements)
-
-        try:
-            convert(temp_docx, temp_pdf)
-        except Exception as e:
-            return jsonify({
-                "ok": False,
-                "error": "Erro ao converter PDF com docx2pdf. Verifique se o Microsoft Word está instalado.",
-                "details": str(e)
-            }), 500
-
-        if not os.path.exists(temp_pdf):
-            return jsonify({
-                "ok": False,
-                "error": "Falha ao gerar PDF. docx2pdf não criou o arquivo."
-            }), 500
-
-        final_pdf = os.path.join(current_app.config["UPLOAD_DIR"], "documento_preenchido.pdf")
-        shutil.copyfile(temp_pdf, final_pdf)
-
-        return send_file(
-            final_pdf,
-            as_attachment=True,
-            download_name="documento_preenchido.pdf"
-        )
-    finally:
-        shutil.rmtree(temp_dir, ignore_errors=True)
+@generator_blueprint.route("/version-details", methods=["GET"])
+def version_details():
+    return render_template("version_details.html")
+  

@@ -358,3 +358,12 @@ input[type="file"]::file-selector-button:hover{
 #varName {
   text-transform: uppercase;
 }
+
+.details {
+  display: flex;
+  align-items: center;
+}
+
+.version-tag {
+  font-size: 12px;
+}

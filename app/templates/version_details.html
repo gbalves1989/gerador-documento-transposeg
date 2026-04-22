@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detalhes da Versão</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <div class="app">
+    <main class="content card" style="max-width: 1100px; margin: 30px auto;">
+      <div class="topline">
+        <div>
+          <h1 style="margin: 0 0 8px;">Detalhes da versão</h1>
+          <div class="hint" style="font-size: 12px;">
+            Informações da release atual do Gerador de Documentos.
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 style="margin-bottom: 8px;">Versão 1.0</h2>
+        <p>
+          Primeira versão operacional do sistema de geração de documentos com preenchimento automático
+          de variáveis e exportação de arquivos.
+        </p>
+      </div>
+
+      <div class="section">
+        <h3>Resumo da versão</h3>
+        <table>
+          <tbody>
+            <tr>
+              <th style="width: 220px;">Versão</th>
+              <td>1.0</td>
+            </tr>
+            <tr>
+              <th>Data da versão</th>
+              <td>21/04/2026</td>
+            </tr>
+            <tr>
+              <th>Status</th>
+              <td>Produção inicial</td>
+            </tr>
+            <tr>
+              <th>Responsável</th>
+              <td>Equipe Transposeg</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section">
+        <h3>Funcionalidades entregues</h3>
+        <ul style="margin: 0; padding-left: 18px;">
+          <li>Cadastro e edição de variáveis por documento</li>
+          <li>Leitura e pré-visualização de arquivos DOCX</li>
+          <li>Preenchimento automático de placeholders no modelo</li>
+          <li>Geração de DOCX preenchido para download</li>
+          <li>Organização por abas para diferentes grupos de variáveis</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>Melhorias previstas</h3>
+        <ul style="margin: 0; padding-left: 18px;">
+          <li>Validação automática de variáveis obrigatórias</li>
+          <li>Template de documentos múltiplos</li>
+          <li>Área administrativa para manutenção de modelos</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>Sugestão de versionamento</h3>
+        <ul style="margin: 0; padding-left: 18px;">
+          <li>Para os documentos modelo versionar (v 1.0)</li>
+          <li>Caso houver novos parâmetros versionar (V 1.1)</li>
+          <li>Caso houver modificações textuais no documento versionar (V 2.0)</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>Base de dados</h3>
+        <ul style="margin: 0; padding-left: 18px;">
+          <li>Quando abrir a aplicação pela primeira vez cria o diretório em (C:\Transposeg\Gerador\data.json)</li>
+          <li>Não modificar os nomes dos diretórios</li>
+          <li>Não modificar o nome do arquivo data.json</li>
+          <li>Se houver novos parâmetros substituir o data.json atual pelo novo que estará em uma pasta compartilhada</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>Observações</h3>
+        <p>
+          Esta página serve como referência funcional da release atual. Em versões futuras, pode ocorrer de mudar ou acrescentar novas instruções e etc. .
+        </p>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

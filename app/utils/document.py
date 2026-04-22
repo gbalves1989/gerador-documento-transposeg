@@ -47,3 +47,4 @@ class Document:
                 merged[key] = value
 
         return merged
+    
